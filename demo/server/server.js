@@ -2,7 +2,7 @@
 var express = require('express'), app = express(), path = require('path'), fs = require('fs-extra'), bodyParser = require('body-parser'), shortid = require('shortid');
 // SERVER CONFIGURATION
 var IMAGE_DIR = path.join(__dirname, '/../g');
-fs.emptyDir('IMAGE_DIR', function (err) {
+fs.emptyDir(IMAGE_DIR, function (err) {
   if (!err) console.log(IMAGE_DIR + " dir was cleared.")
 })
 
