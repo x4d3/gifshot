@@ -41,59 +41,11 @@
       }
     },
     passedOptions,
-    updateCodeBlock = function(obj) {
-      obj = obj || {};
-      var targetElem = obj.targetElem,
-        selectedOptions = getSelectedOptions(),
-        options = (function() {
-          var obj = {};
-
-          _.each(selectedOptions, function(val, key) {
-            if (val) {
-              obj[key] = val;
-            }
-          });
-
-          return obj;
-        }()),
-        template = _.template(gifshotCodeTemplate.innerHTML, {
-          gifshot: window.gifshot,
-          selectedOptions: options,
-          method: gifType.value === 'snapshot' ? 'takeSnapShot' : 'createGIF'
-        }),
-        code = escodegen.generate(esprima.parse(template), {
-          format: {
-            safeConcatenation: true
-          }
-        });
-
-      gifshotCode.innerHTML = code;
-
-      Prism.highlightElement(gifshotCode);
-
-      if (targetElem && (targetElem.id === 'gifWidth' || targetElem.id === 'gifHeight')) {
-        if (selectedOptions.gifHeight && selectedOptions.gifWidth) {
-          gifshotImagePreview.innerHTML = '';
-          placeholderDiv.style.height = selectedOptions.gifHeight + 'px';
-          placeholderDiv.style.width = selectedOptions.gifWidth + 'px';
-          placeholderDivDimensions.innerHTML = selectedOptions.gifWidth + ' x ' + selectedOptions.gifHeight;
-          if (selectedOptions.gifWidth < 60 || selectedOptions.gifHeight < 20) {
-            placeholderDivDimensions.classList.add('hidden');
-          } else {
-            console.log('placeholderDivDimensions.classList: ', placeholderDivDimensions.classList);
-            placeholderDivDimensions.classList.remove('hidden');
-          }
-          placeholderDiv.classList.remove('hidden');
-        } else {
-          placeholderDiv.classList.add('hidden');
-        }
-      }
-    },
     bindEvents = function() {
       createGIFButton.addEventListener('click', function(e) {
         passedOptions = _.merge(_.clone(getSelectedOptions()), {
           'progressCallback': function(captureProgress) {
-            gifshotImagePreview.innerHTML = '';
+            //gifshotImagePreview.innerHTML = '';
             placeholderDiv.classList.add('hidden');
             progressBar.classList.remove('hidden');
             progressBar.value = captureProgress;
@@ -112,7 +64,7 @@
             progressBar.value = 0;
 
             placeholderDiv.classList.add('hidden');
-            gifshotImagePreview.innerHTML = '';
+            //gifshotImagePreview.innerHTML = '';
             gifshotImagePreview.appendChild(animatedImage);
           } else {
             console.log('obj.error', obj.error);
@@ -122,21 +74,33 @@
         });
       }, false);
 
-      document.addEventListener('change', function(e) {
-        updateCodeBlock({
-          targetElem: e.target
-        });
-      });
-
-      document.addEventListener('keyup', function(e) {
-        updateCodeBlock({
-          targetElem: e.target
-        });
-      });
     };
 
+	var video = document.querySelector("#videoElement");
+	 
+	navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
+	 
+	if (navigator.getUserMedia) {       
+		navigator.getUserMedia({video: true}, handleVideo, videoError);
+	}
+	 
+	function handleVideo(stream) {
+		video.src = window.URL.createObjectURL(stream);
+	}
+	 
+	function videoError(e) {
+		// do something
+	}
+	var v,canvas,context,w,h;
+	document.addEventListener('DOMContentLoaded', function(){
+		v = document.getElementById('videoElement');
+		canvas = document.getElementById('canvas');
+		context = canvas.getContext('2d');
+		w = canvas.width;
+		h = canvas.height;
+	},false);
+
+		
+	
   bindEvents();
-  updateCodeBlock({
-    targetElem: gifWidth
-  });
 }(window, document));
