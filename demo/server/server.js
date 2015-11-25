@@ -5,6 +5,8 @@ var express = require('express'),
 // SERVER CONFIGURATION
 app.use(express.static(__dirname + '/../')); // set the static files location /public/img will be /img for users
 
-app.listen(8001);
+app.set('port', (process.env.PORT || 5000));
 
-console.log('To preview gifshot, go to localhost:8001');
+app.listen(app.get('port'), function() {
+  console.log('Node app is running on port', app.get('port'));
+});

@@ -19,6 +19,7 @@
     "name": "Greg Franko"
   }],
   "scripts": {
+	"start": "node demo/server/server.js", 
     "preview": "node demo/server/server.js",
     "build": "gulp",
     "watch": "gulp watch",
