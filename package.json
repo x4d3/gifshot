@@ -28,7 +28,7 @@
   "precommit": [
     "build"
   ],
-  "devDependencies": {
+  "dependencies": {
     "amdclean": "latest",
     "chai": "^1.9.1",
     "express": "^4.2.0",
