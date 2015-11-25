@@ -13,13 +13,16 @@
     "WebRTC",
     "getUserMedia"
   ],
-  "contributors": [{
-    "name": "Chase West"
-  }, {
-    "name": "Greg Franko"
-  }],
+  "contributors": [
+    {
+      "name": "Chase West"
+    },
+    {
+      "name": "Greg Franko"
+    }
+  ],
   "scripts": {
-	"start": "node demo/server/server.js", 
+    "start": "node demo/server/server.js",
     "preview": "node demo/server/server.js",
     "build": "gulp",
     "watch": "gulp watch",
@@ -30,8 +33,10 @@
   ],
   "dependencies": {
     "amdclean": "latest",
+    "body-parser": "1.14.1",
     "chai": "^1.9.1",
     "express": "^4.2.0",
+    "fs-extra": "^0.26.2",
     "gulp": "^3.8.8",
     "gulp-insert": "^0.3.0",
     "gulp-install": "^0.2.0",
@@ -43,7 +48,8 @@
     "jshint": "^2.5.6",
     "lodash": "^2.4.1",
     "precommit-hook": "^1.0.7",
-    "requirejs": "^2.1.11"
+    "requirejs": "^2.1.11",
+    "shortid ": "latest"
   },
   "engine": {
     "node": ">= 0.8"

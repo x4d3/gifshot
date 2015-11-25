@@ -16,6 +16,7 @@
     textBaseline = document.querySelector('#textBaseline'),
     sampleInterval = document.querySelector('#sampleInterval'),
     numWorkers = document.querySelector('#numWorkers'),
+    saveAsFile = document.querySelector('#saveAsFile'),
     gifshotImagePreview = document.querySelector('.gifshot-image-preview-section'),
     placeholderDiv = document.querySelector('.placeholder-div'),
     placeholderDivDimensions = document.querySelector('.placeholder-div-dimensions'),
@@ -37,7 +38,7 @@
         'textAlign': textAlign.value,
         'textBaseline': textBaseline.value,
         'sampleInterval': +sampleInterval.value,
-        'numWorkers': +numWorkers.value
+        'numWorkers': +numWorkers.value,
       }
     },
     passedOptions,
@@ -56,16 +57,31 @@
 
         gifshot[method](passedOptions, function(obj) {
           if (!obj.error) {
-            var image = obj.image,
+            var image = obj.image;
+
+            var setImageCallBack = function(imageSrc){
+              progressBar.classList.add('hidden');
+              progressBar.value = 0;
               animatedImage = document.createElement('img');
-            animatedImage.src = image;
-
-            progressBar.classList.add('hidden');
-            progressBar.value = 0;
-
-            placeholderDiv.classList.add('hidden');
-            //gifshotImagePreview.innerHTML = '';
-            gifshotImagePreview.appendChild(animatedImage);
+              animatedImage.src = imageSrc;
+              gifshotImagePreview.appendChild(animatedImage);
+            };
+            
+            if(saveAsFile.checked){
+              ajax({
+                url:'/upload',
+                type:"POST",
+                data:JSON.stringify({image:image}),
+                contentType:"application/json; charset=utf-8",
+                dataType:"json",
+                success: function(result){
+                  setImageCallBack(result.imageSrc);
+                }
+              });
+              
+            }else{
+              setImageCallBack(image);
+            }
           } else {
             console.log('obj.error', obj.error);
             console.log('obj.errorCode', obj.errorCode);
@@ -91,14 +107,7 @@
 	function videoError(e) {
 		// do something
 	}
-	var v,canvas,context,w,h;
-	document.addEventListener('DOMContentLoaded', function(){
-		v = document.getElementById('videoElement');
-		canvas = document.getElementById('canvas');
-		context = canvas.getContext('2d');
-		w = canvas.width;
-		h = canvas.height;
-	},false);
+
 
 		
 	
