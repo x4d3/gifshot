@@ -35,6 +35,7 @@
     "amdclean": "latest",
     "body-parser": "1.14.1",
     "chai": "^1.9.1",
+    "ejs": "^2.3.4",
     "express": "^4.2.0",
     "fs-extra": "^0.26.2",
     "gulp": "^3.8.8",
@@ -45,8 +46,10 @@
     "gulp-rename": "^1.2.0",
     "gulp-rimraf": "^0.1.0",
     "gulp-uglify": "^0.3.0",
+    "jade": "^1.11.0",
     "jshint": "^2.5.6",
     "lodash": "^2.4.1",
+    "pg": "4.x",
     "precommit-hook": "^1.0.7",
     "requirejs": "^2.1.11",
     "shortid": "^2.2.4"

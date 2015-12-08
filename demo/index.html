@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>Gifshot Demo</title>
+        <title>Gifshot</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
@@ -42,16 +42,6 @@
             <div class="col-md-2 options-section">
               <h3>Options</h3>
               <form class="options-form" action="">
-                <div class="form-group">
-                  <label for="GIFSource">GIF Source</label>
-                  <div class="button custom-select">
-                    <select name="GIFSource" id="GIFSource" class="form-control">
-                      <option value="webcam">webcam</option>
-                      <option value="video">video</option>
-                      <option value="images">images</option>
-                    </select>
-                  </div>
-                </div>
                 <div class="form-group">
                   <label for="GIFType">GIF type</label>
                   <div class="button custom-select">
@@ -149,9 +139,6 @@
                   <label for="numWorkers">Num Workers</label>
                   <input name="numWorkers" id="numWorkers" class="form-control" value="2" size="5" type="number"></input>
                 </div>
-                <div class="form-group">
-                  	<label for="numWorkers">Save As File On Server <input type="checkbox" id="saveAsFile"  value="true"></input></label>
-                </div>
               </form>
             </div>
             <div class="col-md-5 text-center code-section">
@@ -178,7 +165,8 @@
       </section>
 
       <!-- footer  -->
-      <script src="js/dependencies/ajax.min.js"></script>
+      
+      <script src="js/dependencies/jquery-1.5.2.min.js"></script>
       <script src="js/dependencies/gifshot.js"></script>
       <script src="js/dependencies/prism.min.js"></script>
       <script src="js/dependencies/esprima.min.js"></script>
